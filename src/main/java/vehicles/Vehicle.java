@@ -1,5 +1,7 @@
 package vehicles;
 
+import VehiclesRelatedInfo.PlateNumber;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -73,4 +75,6 @@ public abstract class Vehicle {
     public String getFuelType() {
         return fuelType;
     }
+
+
 }

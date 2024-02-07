@@ -1,9 +1,8 @@
 package vehicles;
 
-import javax.persistence.Basic;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import VehiclesRelatedInfo.PlateNumber;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -14,11 +13,20 @@ public class Car extends Vehicle {
     @Basic
     private Integer seats;
 
+    @OneToOne
+    @JoinColumn(name = "plateNumber_id", referencedColumnName = "id")
+    private PlateNumber plateNumber;
+
     public Car(){}
 
     public Car(String model, BigDecimal price, String fuelType, Integer seats) {
         super(model, price, fuelType);
         this.seats = seats;
+    }
+
+    public Car(String model, BigDecimal price, String fuelType, Integer seats, PlateNumber plateNumber) {
+        this(model, price, fuelType, seats);
+        this.plateNumber = plateNumber;
     }
 
     public Integer getSeats() {
@@ -29,5 +37,12 @@ public class Car extends Vehicle {
         this.seats = seats;
     }
 
+    public PlateNumber getPlateNumber() {
+        return plateNumber;
+    }
+
+    public void setPlateNumber(PlateNumber plateNumber) {
+        this.plateNumber = plateNumber;
+    }
 
 }
