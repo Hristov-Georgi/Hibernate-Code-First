@@ -1,5 +1,8 @@
 package VehiclesRelatedInfo;
 
+import vehicles.Car;
+import vehicles.Vehicle;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 
@@ -13,6 +16,9 @@ public class PlateNumber {
 
     @Basic
     private String number;
+
+    @OneToOne(mappedBy = "plateNumber", targetEntity = Car.class)
+    private Vehicle car;
 
     public PlateNumber(){}
 
@@ -34,5 +40,13 @@ public class PlateNumber {
 
     public void setId(BigInteger id) {
         this.id = id;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Vehicle getCar() {
+        return car;
     }
 }

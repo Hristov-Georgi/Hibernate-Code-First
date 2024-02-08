@@ -1,11 +1,12 @@
 import VehiclesRelatedInfo.Company;
+import VehiclesRelatedInfo.Driver;
 import VehiclesRelatedInfo.PlateNumber;
 import vehicles.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -17,11 +18,23 @@ public class Main {
 
         entityManager.getTransaction().begin();
 
-        PlateNumber carPlateNumber2 = new PlateNumber("JJJJ3030KK");
-        PlateNumber carPlateNumber1 = new PlateNumber("LLLLL3030KK");
+        PlateNumber plateNumber3 = new PlateNumber("JJJJAJDAD");
+        PlateNumber plateNumber1 = new PlateNumber("LLAASSA");
 
-        entityManager.persist(carPlateNumber2);
-        entityManager.persist(carPlateNumber1);
+        entityManager.persist(plateNumber3);
+        entityManager.persist(plateNumber1);
+
+
+
+        Vehicle car = new Car("BMV", BigDecimal.valueOf(134444), "gasoline",
+                6, plateNumber1);
+
+        entityManager.persist(car);
+
+        Driver driver = new Driver("Kiril Kirilov");
+        Driver driver1 = new Driver("Rudolf Ruddling");
+        entityManager.persist(driver);
+        entityManager.persist(driver1);
 
         Company company = new Company("Blue Airline");
 
@@ -32,14 +45,16 @@ public class Main {
 
         entityManager.persist(plane1);
 
-        Vehicle car =
-               new Car("golf", new BigDecimal("14000"), "gasoline",5, carPlateNumber2);
-
         Vehicle bike =
                 new Bike("puma", new BigDecimal("1400.87"), "no Fuel");
 
         Vehicle car2 =
-                new Car("golf", new BigDecimal("14000"), "gasoline",5);
+                new Car("a3", new BigDecimal("14000"), "gasoline",5);
+
+        entityManager.persist(car2);
+
+        Driver driver2 = new Driver("Tinko Tinko", car2);
+        entityManager.persist(driver2);
 
         Vehicle plane =
                 new Plane("A-130", new BigDecimal("140000"), "Jet",  200);
@@ -47,13 +62,9 @@ public class Main {
         Vehicle truck =
                 new Truck("volvo", new BigDecimal("50000"), "diesel", 20000.56);
 
-        Vehicle car3 =
-                new Car("golf", new BigDecimal("14000"), "gasoline",5, carPlateNumber1);
 
         entityManager.persist(bike);
-        entityManager.persist(car);
-        entityManager.persist(car2);
-        entityManager.persist(car3);
+
         entityManager.persist(plane);
         entityManager.persist(truck);
 
